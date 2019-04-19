@@ -2,7 +2,6 @@ package org.launchcode.controllers;
 
 import org.launchcode.models.Category;
 import org.launchcode.models.Cheese;
-import org.launchcode.models.CheeseType;
 import org.launchcode.models.data.CategoryDao;
 import org.launchcode.models.data.CheeseDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,7 @@ import java.util.List;
 public class CheeseController {
 
     @Autowired
-    private CheeseDao cheeseDao;
+    CheeseDao cheeseDao;
 
     @Autowired
     CategoryDao categoryDao;
@@ -50,13 +49,14 @@ public class CheeseController {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String processAddCheeseForm(@ModelAttribute  @Valid Cheese newCheese,
-                                       Errors errors, Model model, @RequestParam int categoryId) {
+                                       Errors errors, @RequestParam int categoryId, Model model) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Cheese");
             model.addAttribute("categories", categoryDao.findAll());
             return "cheese/add";
         }
+
         Category cat = categoryDao.findOne(categoryId);
         newCheese.setCategory(cat);
         cheeseDao.save(newCheese);
@@ -81,9 +81,10 @@ public class CheeseController {
     }
 
     @RequestMapping(value = "category", method = RequestMethod.GET)
-    public String category (Model model, @RequestParam int id) {
+    public String category(Model model, @RequestParam int id) {
+
         Category cat = categoryDao.findOne(id);
-        List <Cheese> cheeses = cat.getCheeses();
+        List<Cheese> cheeses = cat.getCheeses();
         model.addAttribute("cheeses", cheeses);
         model.addAttribute("title", "Cheeses in Category: " + cat.getName());
         return "cheese/index";
