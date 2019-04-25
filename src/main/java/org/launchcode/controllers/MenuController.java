@@ -16,7 +16,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping
+@RequestMapping(value="menu")
 public class MenuController {
 
     @Autowired
@@ -44,8 +44,8 @@ public class MenuController {
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String add(@ModelAttribute @Valid Menu menu,
-                                       Errors errors, Model model) {
+    public String add(Model model, @ModelAttribute @Valid Menu menu,
+                                       Errors errors) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Menu");
