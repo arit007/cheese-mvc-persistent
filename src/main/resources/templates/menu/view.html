@@ -8,13 +8,17 @@
 
         <nav th:replace="fragments :: navigation"></nav>
 
+        <form method="post" style="max-width:600px;" th:object="${menu}" action="/menu/view">
+
         <ul>
-            <li th:each="cheese : ${cheeses}" th:text="${cheese.name}"></li>
+            <li th:each="cheese : ${menu.cheeses}"></li>
+            <span th:text="${cheese.name}"></span>
         </ul>
 
         <p th:unless="${cheeses.size()}"><i>no cheeses yet</i></p>
 
         <p><a th:href=" '/menu/add-item/' + ${menuId}"></a></p>
 
+        </form>
     </body>
 </html>
