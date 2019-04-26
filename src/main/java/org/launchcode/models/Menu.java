@@ -16,22 +16,26 @@ public class Menu {
     private int id;
 
     @NotNull
-    @Size(min=3, max=15)
+    @Size(min = 3, max=25)
     private String name;
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     @ManyToMany
     private List<Cheese> cheeses;
 
-    public Menu (){}
+    public void addItem(Cheese item){ cheeses.add(item); }
 
-    public void addItem(Cheese item) {cheeses.add(item); }
+    public Menu(){}
 
-    public int getId () {return id;}
+    public String getName() { return name; }
 
-    public String getName () { return name; }
+    public void setName(String name) { this.name = name;}
 
-    public void setName (String name) {this.name = name; }
+    public int getId() { return id; }
 
-    public List<Cheese> getCheeses() {return cheeses; }
+    public List<Cheese> getCheeses() { return cheeses; }
 }
 

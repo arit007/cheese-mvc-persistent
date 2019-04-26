@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
     <head th:replace="fragments :: head"></head>
-
     <body class="container">
-
         <h1 th:text="${title}">Default Title</h1>
 
         <nav th:replace="fragments :: navigation"></nav>
 
+
         <form method="post" style="max-width:600px;" th:object="${menu}" action="/menu/view">
 
-        <ul>
-            <li th:each="cheese : ${menu.cheeses}"></li>
-            <span th:text="${cheese.name}"></span>
-        </ul>
-
-        <p th:unless="${cheeses.size()}"><i>no cheeses yet</i></p>
-
-        <p><a th:href=" '/menu/add-item/' + ${menuId}"></a></p>
+            <ul>
+                <li th:each="cheese : ${menu.cheeses}" >
+                    <span th:text="${cheese.name}"></span>
+                </li>
+            </ul>
+            <p th:unless=" ${menu.cheeses.size()}">No Cheeses</p>
+            <p><a th:href="@{/menu/add-item/{id} (id=${menu.id})}">Add Cheese</a> </p>
 
         </form>
     </body>

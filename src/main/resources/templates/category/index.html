@@ -3,16 +3,22 @@
 <head th:replace="fragments :: head"></head>
 <body class="container">
 <h1 th:text="${title}">Default Title</h1>
-
 <nav th:replace="fragments :: navigation"></nav>
 
-<ul>
-    <li th:each="category : ${categories}">
-        <a th:href="'/cheese/category?id=' + ${category.id}" th:text="${category.name}"></a>
-    </li>
-</ul>
+<form style="max-width:600px;" th:object="${category}">
 
-<p><a href="/category/add">Add Category</a></p>
+    <p th:unless="${categories} and ${categories.size()}">No Categories :(</p>
 
+    <div>
+        <ul>
+            <li th:each="category : ${categories}" >
+                <a th:href="'/category/view/' +${category.id}">
+                    <span th:text="${category.name}"></span></a>
+            </li>
+        </ul>
+        <a href="/category/add">Add Category</a>
+
+    </div>
+</form>
 </body>
 </html>

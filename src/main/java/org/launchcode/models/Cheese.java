@@ -1,4 +1,3 @@
-
 package org.launchcode.models;
 
 import javax.persistence.*;
@@ -57,11 +56,7 @@ public class Cheese {
         this.description = description;
     }
 
-    public Category getCategory() {
-        return category;
-    }
+    public Category getCategory() {return category;}
 
-    public void setCategory(Category category) {
-        this.category = category;
-    }
+    public void setCategory(Category category) { this.category = category; }
 }

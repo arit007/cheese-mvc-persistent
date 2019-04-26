@@ -24,10 +24,10 @@ import java.util.List;
 public class CheeseController {
 
     @Autowired
-    CheeseDao cheeseDao;
+    private CheeseDao cheeseDao;
 
     @Autowired
-    CategoryDao categoryDao;
+    private CategoryDao categoryDao;
 
     // Request path: /cheese
     @RequestMapping(value = "")
@@ -41,6 +41,7 @@ public class CheeseController {
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String displayAddCheeseForm(Model model) {
+
         model.addAttribute("title", "Add Cheese");
         model.addAttribute(new Cheese());
         model.addAttribute("categories", categoryDao.findAll());
@@ -71,17 +72,17 @@ public class CheeseController {
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.POST)
-    public String processRemoveCheeseForm(@RequestParam int[] ids) {
+    public String processRemoveCheeseForm(@RequestParam int[] cheeseIds) {
 
-        for (int id : ids) {
-            cheeseDao.delete(id);
+        for (int cheeseId : cheeseIds){
+            cheeseDao.delete(cheeseId);
         }
 
         return "redirect:";
     }
 
     @RequestMapping(value = "category", method = RequestMethod.GET)
-    public String category(Model model, @RequestParam int id) {
+    public String category(Model model, @RequestParam int id){
 
         Category cat = categoryDao.findOne(id);
         List<Cheese> cheeses = cat.getCheeses();
