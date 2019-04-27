@@ -54,9 +54,9 @@ public class MenuController {
     }
 
     @RequestMapping(value ="view/{menuId}", method = RequestMethod.GET)
-    public String viewMenu(Model model, @ModelAttribute Menu menu, @PathVariable int menuId ){
+    public String viewMenu(Model model, @PathVariable int menuId ){
 
-        menu = menuDao.findOne(menuId);
+        Menu menu = menuDao.findOne(menuId);
         model.addAttribute("title", menu.getName());
         model.addAttribute("menu", menu);
         return "menu/view";
@@ -74,7 +74,7 @@ public class MenuController {
 
     @RequestMapping(value = "add-item", method = RequestMethod.POST)
     public String addItem(Model model, @ModelAttribute @Valid AddMenuItemForm
-            form, Errors errors ){
+            form, Errors errors){
 
         if (errors.hasErrors()){
             model.addAttribute("form", form);

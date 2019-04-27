@@ -6,6 +6,9 @@ import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by LaunchCode
+ */
 @Entity
 public class Category {
 
@@ -39,5 +42,6 @@ public class Category {
         this.name = name;
     }
 
-    public List<Cheese> getCheeses() { return cheeses;}
+    public List<Cheese> getCheeses() {
+        return cheeses;}
 }

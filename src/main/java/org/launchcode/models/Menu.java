@@ -8,6 +8,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
 
+/**
+ * Created by LaunchCode
+ */
 @Entity
 public class Menu {
 
@@ -30,12 +33,16 @@ public class Menu {
 
     public Menu(){}
 
-    public String getName() { return name; }
+    public String getName() {
+        return name; }
 
-    public void setName(String name) { this.name = name;}
+    public void setName(String name) {
+        this.name = name;}
 
-    public int getId() { return id; }
+    public int getId() {
+        return id; }
 
-    public List<Cheese> getCheeses() { return cheeses; }
+    public List<Cheese> getCheeses() {
+        return cheeses; }
 }
 
