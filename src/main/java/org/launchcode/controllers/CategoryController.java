@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -21,43 +20,37 @@ public class CategoryController {
     private CategoryDao categoryDao;
 
     @RequestMapping(value = "")
-    public String index(Model model){
+    public String index(Model model) {
 
-        model.addAttribute("categories", categoryDao.findAll());
+        Iterable<Category> categories = categoryDao.findAll();
+
+        model.addAttribute("categories", categories);
         model.addAttribute("title", "Categories");
 
         return "category/index";
     }
 
-
     @RequestMapping(value = "add", method = RequestMethod.GET)
-    public String displayAddCategoryForm(Model model) {
+    public String displayAddForm(Model model) {
 
         model.addAttribute(new Category());
         model.addAttribute("title", "Add Category");
 
-        return "category/add";
 
+        return "category/add";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String add(Model model, @ModelAttribute @Valid Category category,
-                      Errors errors){
+    public String processAddForm(@ModelAttribute @Valid Category category, Errors errors, Model model) {
 
-        if (errors.hasErrors()) {
+        if(errors.hasErrors()) {
             model.addAttribute("title", "Add Category");
             return "category/add";
+        } else {
+            categoryDao.save(category);
+            return "redirect:";
         }
-        categoryDao.save(category);
-        return "redirect:";
     }
 
-    @RequestMapping(value = "view/{categoryId}", method=RequestMethod.GET)
-    public String view(Model model, @ModelAttribute Category category, @PathVariable int categoryId){
-        category = categoryDao.findOne(categoryId);
-        model.addAttribute("title", category.getName());
-        model.addAttribute("category", category);
-        return "category/view";
-    }
 
 }

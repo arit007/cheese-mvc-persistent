@@ -2,23 +2,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body class="container">
-    <h1 th:text="${title}">Default Title</h1>
-    <nav th:replace="fragments :: navigation"></nav>
+<h1 th:text="${title}">Default Title</h1>
 
-    <form style="max-width:600px;" th:object="${category}">
-        <p th:unless="${categories} and ${categories.size()}">No Categories :(</p>
+<nav th:replace="fragments :: navigation"></nav>
 
-    <div>
-        <ul>
-            <li th:each="category : ${categories}">
-                <a th:href="'/category/view/' +${category.id}">
-                    <span th:text="${category.name}"></span>
-                </a>
-            </li>
-        </ul>
-        <a href="/category/add">Add Category</a>
+<ul>
+    <li th:each="category : ${categories}">
+        <a th:href="'/cheese/category?id=' + ${category.id}" th:text="${category.name}"></a>
+    </li>
+</ul>
 
-    </div>
-</form>
+<p><a href="/category/add">Add Category</a></p>
+
 </body>
 </html>

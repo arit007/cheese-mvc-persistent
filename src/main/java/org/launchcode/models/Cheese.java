@@ -57,8 +57,10 @@ public class Cheese {
     }
 
     public Category getCategory() {
-        return category;}
+        return category;
+    }
 
     public void setCategory(Category category) {
-        this.category = category; }
+        this.category = category;
+    }
 }

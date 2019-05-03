@@ -6,9 +6,6 @@ import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by LaunchCode
- */
 @Entity
 public class Category {
 
@@ -24,11 +21,11 @@ public class Category {
     @JoinColumn(name = "category_id")
     private List<Cheese> cheeses = new ArrayList<>();
 
-    public Category(){}
-
     public Category(String name) {
         this.name = name;
     }
+
+    public Category() { }
 
     public int getId() {
         return id;
@@ -43,5 +40,7 @@ public class Category {
     }
 
     public List<Cheese> getCheeses() {
-        return cheeses;}
+        return cheeses;
+    }
+
 }
